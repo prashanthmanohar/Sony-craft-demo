@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: craft-demo
+spec:
+  rules:
+  - host: craft-demo.sony.com
+    http:
+      paths:
+      - backend:
+          serviceName: health
+          servicePort: 8080
+        path: /health
+      - backend:
+          serviceName: diag
+          servicePort: 8080
+        path: /diag
+	  - backend:
+          serviceName: convert
+          servicePort: 8080
+        path: /convert

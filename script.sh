@@ -37,6 +37,8 @@ main() {
                 fi
             done
         else
+	    help_page
+	    exit
         fi
     fi
 

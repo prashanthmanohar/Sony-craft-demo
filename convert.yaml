@@ -12,25 +12,29 @@ spec:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: health
-spec:
+metadata: 
+  labels: 
+    app: convert
+  name: convert
+spec: 
   replicas: 1
-  selector:
-    matchLabels:
-      app: health
-  template:
-    metadata:
-      labels:
-        app: health
-    spec:
-      containers:
-      - name:   
-	 image: <account>.dkr.ecr.ap-south-1.amazonaws.com/craft-demo-convert:latest
-	 livenessProbe:
-           initialDelaySeconds: 2
-           periodSeconds: 5
-           httpGet:
-           path: /health
-             port: 8080
-	     args: []
+  selector: 
+    matchLabels: 
+      app: convert
+  strategy: 
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template: 
+    metadata: 
+      labels: 
+        app: convert
+    spec: 
+      containers: 
+        - 
+          args: 
+            - "--countryCodes=AU"
+          image: "<docker-hub-regustry>/sony:2"
+          imagePullPolicy: IfNotPresent
+          name: convert

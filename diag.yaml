@@ -12,17 +12,24 @@ spec:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: diag
-spec: 
+spec:
   replicas: 1
-  selector: 
-    matchLabels: 
+  selector:
+    matchLabels:
       app: diag
-  template: 
-    metadata: 
-      labels: 
+  template:
+    metadata:
+      labels:
         app: diag
-    spec: 
-      containers: 
-        - "command - /bin/sh - -c - |- curl -I -s -L https://www.travel-advisory.info/api | grep \"HTTP/2\""
+    spec:
+     containers:
+     - command:
+       - /bin/sh
+       - -c
+       - |-
+         echo "ENV variables setup done."
+         curl -I -s -L https://www.travel-advisory.info/api | grep \"HTTP/2\"
+       name: diag
+       image: odaniait/aws-kubectl:latest

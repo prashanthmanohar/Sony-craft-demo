@@ -25,12 +25,5 @@ spec:
         app: health
     spec:
       containers:
-      - name:   
-	    image: <account>.dkr.ecr.ap-south-1.amazonaws.com/craft-demo:latest
-	    livenessProbe:
-          initialDelaySeconds: 2
-          periodSeconds: 5
-          httpGet:
-          path: /health
-            port: 8080
-	    args: []
+      - name: health   
+	
